@@ -4,4 +4,19 @@
   margin: 0rem 1.5rem;
   background-image: url("https://img.freepik.com/free-photo/realistic-phone-studio-social-media-concept_23-2151459576.jpg?t=st=1718044853~exp=1718048453~hmac=d6fd465185312fa09a87b0a63a88050f5129a9fc71762f6f522465d9d8597547&w=1000");
   background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.navbar {
+  width: 40%;
+  height: 50%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

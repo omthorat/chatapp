@@ -1,0 +1,30 @@
+.loginPage {
+  width: 100%;
+}
+.loginform {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+.loginInput {
+  color: white;
+}
+.loginInputGroup {
+  margin-bottom: 0.5rem;
+}
+.loginBtn {
+  margin: 1rem 0rem;
+  width: 50%;
+}
+.loginBottom {
+  display: flex;
+  justify-content: space-between;
+}
+.newHere {
+  margin-top: 1rem;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
