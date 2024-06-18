@@ -7,6 +7,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   Button,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
@@ -15,6 +16,8 @@ import "./LoginPage.css";
 const LoginPage = () => {
   const [inputEmail, setInputEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [show, setShow] = React.useState(false);
+  const handleClick = () => setShow(!show);
   const handleLogin = () => {
     console.log(inputEmail, password);
   };
@@ -42,13 +45,18 @@ const LoginPage = () => {
             </InputLeftElement>
             <Input
               variant="flushed"
-              type="password"
+              type={show ? "text" : "password"}
               className="loginInput"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               _placeholder={{ opacity: 1, color: "white" }}
             />
+            <InputRightElement width="4.5rem">
+              <Button h="1.5rem" size="xs" onClick={handleClick}>
+                {show ? "Hide" : "Show"}
+              </Button>
+            </InputRightElement>
           </InputGroup>
           <div className="loginBottom">
             <Button
@@ -59,9 +67,20 @@ const LoginPage = () => {
               Login
             </Button>
             <p className="newHere">
-              New Here?<span style={{ color: "white" }}>SignUp</span>
+              New Here?
+              <span style={{ color: "blue", cursor: "pointer" }}>SignUp</span>
             </p>
           </div>
+          <Button
+            className="guestBtn"
+            colorScheme="gray"
+            size="xs"
+            onClick={() => {
+              setInputEmail("guest123@gmail.com");
+              setPassword("123456");
+            }}>
+            Guest
+          </Button>
         </FormControl>
       </div>
     </div>

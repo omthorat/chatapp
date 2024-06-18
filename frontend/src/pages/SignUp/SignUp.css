@@ -1,0 +1,30 @@
+.signupPage {
+  width: 100%;
+}
+.signupForm {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+.signupInput {
+  color: white;
+}
+.signupInputGroup {
+  margin-bottom: 0.5rem;
+}
+.signupBtn {
+  margin: 1rem 0rem;
+  width: 50%;
+}
+.signupBottom {
+  display: flex;
+  justify-content: space-between;
+}
+.newHere {
+  margin-top: 1rem;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
