@@ -1,9 +1,7 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   InputGroup,
   InputLeftElement,
@@ -11,15 +9,67 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { EmailIcon, LockIcon } from "@chakra-ui/icons";
+import { useToast } from "@chakra-ui/react";
 import "./LoginPage.css";
+import axios from "axios";
 
 const LoginPage = () => {
-  const [inputEmail, setInputEmail] = useState("");
+  const toast = useToast();
+  const history = useHistory();
+  const [email, setInputEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = React.useState(false);
+  const [loading, setLoading] = useState(false);
   const handleClick = () => setShow(!show);
-  const handleLogin = () => {
-    console.log(inputEmail, password);
+
+  const handleLogin = async () => {
+    setLoading(true);
+    if (!email || !password) {
+      toast({
+        title: "Please Fill all the Feilds",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+      return;
+    }
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+        },
+      };
+      const { data } = await axios.post(
+        "/api/user/login",
+        { email, password },
+        {
+          config,
+        }
+      );
+      toast({
+        title: "Login Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      console.log(data);
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setLoading(false);
+      history.push("/chats");
+    } catch (error) {
+      toast({
+        title: "Error Occured!",
+        description: error.response.data.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setLoading(false);
+    }
   };
   return (
     <div className="loginPage">
@@ -33,7 +83,7 @@ const LoginPage = () => {
               variant="flushed"
               type="email"
               className="loginInput"
-              value={inputEmail}
+              value={email}
               onChange={(e) => setInputEmail(e.target.value)}
               placeholder="Email Address"
               _placeholder={{ opacity: 1, color: "white" }}
@@ -63,6 +113,7 @@ const LoginPage = () => {
               className="loginBtn"
               colorScheme="gray"
               size="sm"
+              isLoading={loading}
               onClick={() => handleLogin()}>
               Login
             </Button>
