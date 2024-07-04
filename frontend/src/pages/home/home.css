@@ -1,22 +1,54 @@
 .home {
-  width: 95%;
-  height: 100vh;
-  margin: 0rem 1.5rem;
-  background-image: url("https://img.freepik.com/free-photo/realistic-phone-studio-social-media-concept_23-2151459576.jpg?t=st=1718044853~exp=1718048453~hmac=d6fd465185312fa09a87b0a63a88050f5129a9fc71762f6f522465d9d8597547&w=1000");
-  background-repeat: no-repeat;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* background-image: url("https://img.freepik.com/free-photo/realistic-phone-studio-social-media-concept_23-2151459576.jpg?t=st=1718044853~exp=1718048453~hmac=d6fd465185312fa09a87b0a63a88050f5129a9fc71762f6f522465d9d8597547&w=1000"); */
 }
-.navbar {
-  width: 40%;
-  height: 50%;
-  padding: 1rem;
+.chatimg{
+  width: 100%;
+  height: 92vh;
+
+ /* height: 1vh; */
+  /* background-color: aqua; */
+  /* background-image: "../../../public/images/chatimg.jpg"; */
+}
+.homenavbar{
   display: flex;
-  flex-direction: column;
+  justify-content:space-between;
+  align-items: center;
+
+}
+.header{
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+}
+.navtopages{
+  display: flex;
+  gap: 1rem;
+  margin-right: 1rem !important;
 }
 .navigation {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: flex-end;
+  /* background-color: white; */
+  padding: 0.5rem;
+ border-radius: 10px;
+}
+
+.loginbtn{
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.loginbtn:hover{
+  color: rgb(141, 141, 141);
+  /* background-color: black; */
+}
+.signupbtn{
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.signupbtn:hover{
+  color: rgb(141, 141, 141);
+  /* background-color: black; */
 }

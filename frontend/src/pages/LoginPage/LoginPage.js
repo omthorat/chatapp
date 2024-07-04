@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import {
   FormControl,
   Input,
@@ -20,7 +20,12 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [show, setShow] = React.useState(false);
   const [loading, setLoading] = useState(false);
-  const handleClick = () => setShow(!show);
+  const handleClick = () =>{
+    if(password){
+      setShow(!show);
+    }
+    
+  } 
 
   const handleLogin = async () => {
     setLoading(true);
@@ -74,6 +79,7 @@ const LoginPage = () => {
   return (
     <div className="loginPage">
       <div className="loginform">
+        <h3 className="login-heading">Login Page</h3>
         <FormControl>
           <InputGroup className="loginInputGroup">
             <InputLeftElement pointerEvents="none">
@@ -119,18 +125,17 @@ const LoginPage = () => {
             </Button>
             <p className="newHere">
               New Here?
-              <span style={{ color: "blue", cursor: "pointer" }}>SignUp</span>
+             <Link to="/signup"><span style={{ color: "blue", cursor: "pointer" }}>SignUp</span></Link>
+             <Link to="/"><span style={{ color: "blue", cursor: "pointer" }}> / Home</span></Link>
             </p>
           </div>
           <Button
-            className="guestBtn"
-            colorScheme="gray"
-            size="xs"
+            className="guestUser"
             onClick={() => {
               setInputEmail("guest123@gmail.com");
               setPassword("123456");
             }}>
-            Guest
+            Guest User
           </Button>
         </FormControl>
       </div>

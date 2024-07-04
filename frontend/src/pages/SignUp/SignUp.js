@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import {
   FormControl,
   Avatar,
@@ -24,8 +24,19 @@ const SignUp = () => {
   const [pic, setpic] = useState("");
   const [loading, setLoading] = useState(false);
   const toast = useToast();
-  const [show, setShow] = React.useState(false);
-  const handleClick = () => setShow(!show);
+  const [show, setShow] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const handleClick = () => {
+    if(password){
+      setShow(!show);
+    }
+    
+  };
+  const handleClickConfirmPassword=()=>{
+    if(confirmPassword){
+      setShowConfirmPassword(!showConfirmPassword);
+    }
+  }
   const postDetails = (userpic) => {
     setLoading(true);
     if (userpic === undefined) {
@@ -137,6 +148,7 @@ const SignUp = () => {
   return (
     <div className="signupPage">
       <div className="signupForm">
+      <h3 className="signup-heading">SignUp Page</h3>
         <FormControl>
           <InputGroup className="signupInputGroup">
             <InputLeftElement pointerEvents="none">
@@ -192,7 +204,7 @@ const SignUp = () => {
             </InputLeftElement>
             <Input
               variant="flushed"
-              type={show ? "text" : "password"}
+              type={showConfirmPassword ? "text" : "password"}
               className="signupInput"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
@@ -200,8 +212,8 @@ const SignUp = () => {
               _placeholder={{ opacity: 1, color: "white" }}
             />
             <InputRightElement width="4.5rem">
-              <Button h="1.5rem" size="xs" onClick={handleClick}>
-                {show ? "Hide" : "Show"}
+              <Button h="1.5rem" size="xs" onClick={handleClickConfirmPassword}>
+                {showConfirmPassword ? "Hide" : "Show"}
               </Button>
             </InputRightElement>
           </InputGroup>
@@ -226,7 +238,8 @@ const SignUp = () => {
             </Button>
             <p className="newHere">
               Already Register?
-              <span style={{ color: "blue", cursor: "pointer" }}>Login</span>
+              <Link to="/login"><span style={{ color: "blue", cursor: "pointer" }}>Login</span></Link>
+              <Link to="/"><span style={{ color: "blue", cursor: "pointer" }}> / Home</span></Link>
             </p>
           </div>
         </FormControl>
