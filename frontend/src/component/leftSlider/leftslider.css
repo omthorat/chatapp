@@ -1,0 +1,10 @@
+.chatNavbar {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal_body {
+  display: flex;
+}
