@@ -1,25 +1,95 @@
-import { Box, Tooltip, Button, Text } from "@chakra-ui/react";
+import React,{useRef, useState} from "react";
+import { Box, Tooltip, Button, Text,Input } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
+import { useHistory,Link } from "react-router-dom";
+import axios from "axios"
 import {
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
-  MenuList,
+  MenuList
 } from "@chakra-ui/menu";
+
+import {
+  Drawer,
+  DrawerBody,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+} from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react'
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { useDisclosure } from "@chakra-ui/hooks";
 import { Avatar } from "@chakra-ui/avatar";
-import React from "react";
 import "./leftslider.css";
 import { ChatState } from "../../context/ChatProvider";
 import ProfileModel from "./ProfileModel";
+import ChatLoading from "../ChatLoading";
+import UserListItem from "../UserListItem";
 const LeftSlider = () => {
+  const [search,setSearch]=useState("")
+  const [loading,setLoading]=useState(false)
+  const [searchResult,setSearchResult]=useState([])
+  const history = useHistory();
+  const toast = useToast()
   const { user } = ChatState();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const btnRef =useRef()
+  const handleLogout=()=>{
+    console.log("logout")
+    localStorage.removeItem("userinfo")
+    history.push("/")
+  }
+  const handleSearch= async()=>{
+    if(!search){
+      toast({
+        title: 'Please Enter Search User..',
+        status: 'warning',
+        duration: 2000,
+        isClosable: true,
+        position:"top-left",
+
+      })
+      return;
+    }
+      try {
+        setLoading(true);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
+        const { data } = await axios.get(`/api/user?search=${search}`, config);
+        console.log(data)
+        setLoading(false);
+        setSearchResult(data);
+        
+      } catch (error) {
+        toast({
+          title: {error},
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+          position:"top-left",
+  
+        })
+        
+      }
+
+    
+  }
+
+  const openUserChat=()=>{
+
+  }
   return (
     <>
       <Box className="chatNavbar">
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
-          <Button variant="ghost">
+          <Button variant="ghost" ref={btnRef} onClick={onOpen} >
             <Search2Icon></Search2Icon>
             <Text d={{ base: "none", md: "flex" }} px={4} m="0px">
               {" "}
@@ -50,11 +120,45 @@ const LeftSlider = () => {
                 <MenuItem>My Profile</MenuItem>
               </ProfileModel>
               <MenuDivider />
-              <MenuItem>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </MenuList>
           </Menu>
         </div>
       </Box>
+      <Drawer
+        isOpen={isOpen}
+        placement='left'
+        onClose={onClose}
+        finalFocusRef={btnRef}
+      >
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Search Users</DrawerHeader>
+
+          <DrawerBody>
+            <div style={{display:"flex"}}>
+            <Input placeholder='Type here...' mr="5px" value={search} onChange={(e)=>setSearch(e.target.value)}/>
+            <Button onClick={handleSearch} >GO</Button>
+            </div>
+            {loading?<ChatLoading/>:(searchResult?.map((user)=>(<UserListItem
+              key={user._id}
+              user={user}
+              handleFunction={()=>openUserChat}/>)
+              
+            ))}
+            
+          </DrawerBody>
+
+          <DrawerFooter>
+            <Button variant='outline' mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme='blue'>Save</Button>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+
     </>
   );
 };
