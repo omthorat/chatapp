@@ -236,10 +236,10 @@ const SignUp = () => {
               onClick={() => handleSignup()}>
               Register
             </Button>
-            <p className="newHere">
+            <p className="newHere"  style={{fontSize:"1rem" }}>
               Already Register?
-              <Link to="/login"><span style={{ color: "blue", cursor: "pointer" }}>Login</span></Link>
-              <Link to="/"><span style={{ color: "blue", cursor: "pointer" }}> / Home</span></Link>
+              <Link to="/login"><span style={{ color: "white", cursor: "pointer",textDecoration:"underline",fontSize:"1rem" }}>Login</span>&nbsp;/</Link>
+              <Link to="/"><span style={{ color: "white", cursor: "pointer",textDecoration:"underline",fontSize:"1rem" }}>&nbsp;Home</span></Link>
             </p>
           </div>
         </FormControl>

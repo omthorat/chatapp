@@ -123,10 +123,10 @@ const LoginPage = () => {
               onClick={() => handleLogin()}>
               Login
             </Button>
-            <p className="newHere">
+            <p className="newHere" style={{fontSize:"1rem" }}>
               New Here?
-             <Link to="/signup"><span style={{ color: "blue", cursor: "pointer" }}>SignUp</span></Link>
-             <Link to="/"><span style={{ color: "blue", cursor: "pointer" }}> / Home</span></Link>
+             <Link to="/signup"><span style={{ color: "white", cursor: "pointer",textDecoration:"underline",fontSize:"1rem" }}>SignUp</span>&nbsp;/</Link>
+             <Link to="/"><span style={{ color: "white", cursor: "pointer",textDecoration:"underline",fontSize:"1rem" }}>&nbsp;Home</span></Link>
             </p>
           </div>
           <Button

@@ -1,3 +1,6 @@
+.chats-home{
+  background-color: rgb(187, 185, 185);
+}
 .chatsPage {
   display: flex;
   justify-content: space-between;

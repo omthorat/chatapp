@@ -10,7 +10,7 @@ const Chats = () => {
   const { user } = ChatState();
   return (
     <>
-      <div>
+      <div className="chats-home">
         {user && <LeftSlider />}
         <Box className="chatsPage">
           {user && <UsersChat />}
