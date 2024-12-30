@@ -125,7 +125,7 @@ const LeftSlider = () => {
           </Button>
         </Tooltip>
         <Text fontSize="xl" fontFamily="Work sans">
-          Talk-A-Tive
+        Chatterly
         </Text>
         <div>
           <Menu>
